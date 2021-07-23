@@ -7,27 +7,25 @@ const submitMessage = () =>{
     enterBtn.addEventListener('click',(e)=>{
         console.log("message "+thisMessage.value);
         console.log("passcode "+passcode.value);
-        let countCap=0;
-        let countNum=0
+        let countCap=false;
+        let countNum=false;
         for(let i=0;i<passcode.length;i++){
             if((passcode.value.charCodeAt(i)>=65)&&(passcode.value.charCodeAt(i)<=90))
             {
-                countCap++;
+                countCap=true;
+                break;
             }else if((passcode.value.charCodeAt(i)>=48)&&(passcode.value.charCodeAt(i)<=57)){
-                countNum++;
+                countNum=true;
             }
         }
-        if((countCap==0)&&(countNum==0)){
-            //console.log("Make sure you have a capital letter AND a number in your passcode");
-            alert("Make sure you have a capital letter AND a number in your passcode");
-        }else if((countCap==0)||(countNum==0)){
-            //console.log("You're missing either a capital letter or a number in your passcode");
-            alert("You're missing either a capital letter or a number in your passcode");
-        }else{
+        if(countCap||countNum){
             messageRef.push({
             message: thisMessage.value,
             passcode: passcode.value
         })
+        }else{
+            //console.log("Make sure you have a capital letter AND a number in your passcode");
+            alert("Make sure you have a capital letter OR a number in your passcode");
         }
     })
 //put code for write message in here
